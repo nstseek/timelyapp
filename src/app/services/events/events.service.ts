@@ -3,6 +3,10 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { HttpResponse, Image } from '../core/types';
 import { Subject } from 'rxjs';
 
+/** Defines the default API interface used to send events.
+ *
+ * An additional optional prop called imageURL was created to facilitate displaying images.
+ */
 export interface Event {
   imageURL?: string;
   images: Image[];
@@ -13,6 +17,7 @@ export interface Event {
   url: string;
 }
 
+/** Defines the default API response when retrieving events. */
 interface EventsResponse {
   total: number;
   from: number;
@@ -22,12 +27,17 @@ interface EventsResponse {
   items: Event[];
 }
 
+/** Service created to fetch event data from API. */
 @Injectable({
   providedIn: 'root'
 })
 export class EventsService {
   constructor(private http: HttpClient) {}
 
+  /**
+   * Parses the image array returned from the API into a single URL to be used as `src` in a `<img>` HTML component.
+   * @param event The event that contains (or do not contain) an image.
+   */
   private parseImageURL(event: Event): string {
     let url;
     if (event && event.images && event.images.length) {
@@ -47,6 +57,14 @@ export class EventsService {
     }
   }
 
+  /**
+   * Makes the request to the API fetching new events and parses the `imageURL` using the private `parseImageURL` function.
+   * @param page Sets the actual page index.
+   * @param pageSize Sets the actual page size.
+   * @param startDate Sets the start date to filter. (when appliable)
+   * @param category Sets the category to filter. (when appliable)
+   * @param tag Sets the tag to filter. (when appliable)
+   */
   getEvents(
     page: number,
     pageSize: number,
