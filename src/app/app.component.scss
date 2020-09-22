@@ -16,4 +16,19 @@ div#app {
       line-height: 45px;
     }
   }
+  div#content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 21px;
+    button#filters {
+      position: fixed;
+      bottom: 21px;
+      left: 21px;
+    }
+    div#cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
 }

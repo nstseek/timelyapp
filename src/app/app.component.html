@@ -1,8 +1,18 @@
 <div id="app">
+  <app-loading *ngIf="loading"></app-loading>
   <div id="header">
     <span>Timely App</span>
   </div>
   <div id="content">
-    <app-loading *ngIf="loading"></app-loading>
+    <div id="cards">
+      <app-event *ngFor="let event of events.data" [event]="event"></app-event>
+    </div>
+    <mat-paginator
+      (page)="eventPageChange($event)"
+      [length]="events.totalItems"
+      [pageSize]="events.pageSize"
+      [pageSizeOptions]="[5, 10, 15, 20, 25]"
+    ></mat-paginator>
+    <button id="filters" mat-fab (click)="openFilters()">Filters</button>
   </div>
 </div>
