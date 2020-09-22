@@ -1,0 +1,16 @@
+mat-dialog-content.mat-typography {
+  padding: 50px;
+  input {
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 8px;
+    margin-bottom: 13px;
+  }
+  div#datepicker-container {
+    position: relative;
+    mat-datepicker-toggle {
+      position: absolute;
+      right: 0;
+    }
+  }
+}
