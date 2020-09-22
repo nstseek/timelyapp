@@ -1,0 +1,15 @@
+div.card-container {
+  margin: 13px;
+  width: 300px;
+  height: 500px;
+  img.main-img {
+    object-fit: cover;
+    height: 200px;
+  }
+  & > mat-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    word-break: break-all;
+  }
+}

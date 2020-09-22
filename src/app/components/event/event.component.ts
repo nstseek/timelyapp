@@ -1,19 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-
-interface Event {
-  title: string;
-  startDate: Date;
-  description: string;
-  image: null;
-}
+import { Component, Input } from '@angular/core';
+import { Event } from '../../services/events';
 
 @Component({
   selector: 'app-event',
   templateUrl: './event.component.html',
   styleUrls: ['./event.component.scss']
 })
-export class EventComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
+export class EventComponent {
+  @Input() event: Event = {
+    description_short: null,
+    id: null,
+    imageURL: null,
+    images: null,
+    start_datetime: null,
+    title: null,
+    url: null
+  };
 }

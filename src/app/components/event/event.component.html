@@ -1,1 +1,27 @@
-<p>event works!</p>
+<div class="card-container">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>{{
+        event.title ? event.title : 'No title available'
+      }}</mat-card-title>
+      <mat-card-subtitle>{{
+        event.start_datetime ? event.start_datetime : 'Start date not available'
+      }}</mat-card-subtitle>
+    </mat-card-header>
+    <img
+      mat-card-image
+      class="main-img"
+      [src]="event.imageURL"
+      alt="Event image"
+    />
+    <mat-card-content>
+      <p>
+        {{
+          event.description_short
+            ? event.description_short
+            : 'No description available'
+        }}
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>
