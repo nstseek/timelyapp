@@ -11,3 +11,7 @@ body {
 * {
   box-sizing: border-box;
 }
+
+.mat-progress-spinner circle, .mat-spinner circle {
+  stroke: greenyellow;
+}
