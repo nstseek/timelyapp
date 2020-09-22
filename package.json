@@ -7,6 +7,10 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
+    "lint:fix": "ng lint --fix",
+    "prettier": "prettier --check \"src/app/**/*\"",
+    "prettier:fix": "prettier --write \"src/app/**/*\"",
+    "check": "npm run lint && npm run prettier && npm run test && npm run build",
     "e2e": "ng e2e"
   },
   "private": true,
@@ -24,24 +28,50 @@
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
+    "@angular-builders/jest": "^8.3.2",
     "@angular-devkit/build-angular": "~0.803.29",
     "@angular/cli": "~8.3.29",
     "@angular/compiler-cli": "~8.2.14",
     "@angular/language-service": "~8.2.14",
-    "@types/node": "~8.9.4",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
+    "@types/jest": "^26.0.14",
+    "@types/node": "~8.9.4",
     "codelyzer": "^5.0.0",
+    "husky": "^4.3.0",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
+    "jest": "^24.9.0",
+    "jest-junit": "^10.0.0",
+    "jest-preset-angular": "^7.1.1",
     "karma": "~4.1.0",
     "karma-chrome-launcher": "~2.2.0",
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.0",
+    "prettier": "^2.1.2",
     "protractor": "~7.0.0",
+    "stylelint": "^12.0.1",
+    "stylelint-config-recommended-scss": "^4.1.0",
+    "stylelint-scss": "^3.13.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
     "typescript": "~3.5.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run check"
+    }
+  },
+  "prettier": {
+    "trailingComma": "none",
+    "tabWidth": 2,
+    "semi": true,
+    "singleQuote": true,
+    "arrowParens": "always",
+    "jsxBracketSameLine": true,
+    "jsxSingleQuote": true,
+    "printWidth": 80,
+    "useTabs": false
   }
 }
