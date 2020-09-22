@@ -78,7 +78,8 @@ export class FiltersComponent implements OnInit {
     }
     return {
       tag: null,
-      category: null
+      category: null,
+      start_date: null
     };
   }
 

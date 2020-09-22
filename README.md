@@ -20,6 +20,8 @@ Run `npm run build` to build the project. The build artifacts will be stored in 
 
 Run `npm run test` to execute the unit tests via [Jest](https://jestjs.io/).
 
+Unfortunately I didn't have time to truly test the application, the test coverage reported by Jest isn't that good. I hope I have time in the future to improve unit testing in this project, I usually don't leave testing like this, but since it is only a test project, won't be really used and I don't have time to spend, it will remain like this for some time.
+
 ## Running end-to-end tests
 
 Run `npm run e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).

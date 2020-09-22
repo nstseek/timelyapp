@@ -1,14 +1,20 @@
-import { TestBed } from '@angular/core/testing';
-
+import { TestBed, getTestBed } from '@angular/core/testing';
 import { TaxonomiesService } from './taxonomies.service';
-import { HttpClientModule } from '@angular/common/http';
+import {
+  HttpTestingController,
+  HttpClientTestingModule
+} from '@angular/common/http/testing';
 
 describe('TaxonomiesService', () => {
-  beforeEach(() =>
+  let injector: TestBed;
+  let httpMock: HttpTestingController;
+  beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientModule]
-    })
-  );
+      imports: [HttpClientTestingModule]
+    });
+    injector = getTestBed();
+    httpMock = injector.get(HttpTestingController);
+  });
 
   it('should be created', () => {
     const service: TaxonomiesService = TestBed.get(TaxonomiesService);
