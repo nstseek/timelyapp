@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { HttpResponse, Image } from '../core/types';
+import { Subject } from 'rxjs';
 
 export interface Event {
+  imageURL?: string;
   images: Image[];
   start_datetime: string;
   title: string;
@@ -11,7 +13,7 @@ export interface Event {
   url: string;
 }
 
-export interface EventsResponse {
+interface EventsResponse {
   total: number;
   from: number;
   size: number;
@@ -25,6 +27,25 @@ export interface EventsResponse {
 })
 export class EventsService {
   constructor(private http: HttpClient) {}
+
+  private parseImageURL(event: Event): string {
+    let url;
+    if (event && event.images && event.images.length) {
+      event.images.find((image) => {
+        Object.keys(image.sizes).find((key) => {
+          if (image.sizes[key].url) {
+            url = image.sizes[key].url;
+            return true;
+          }
+          return false;
+        });
+        return !!url;
+      });
+      return url ? url : 'https://picsum.photos/250';
+    } else {
+      return 'https://picsum.photos/250';
+    }
+  }
 
   getEvents(
     page: number,
@@ -50,8 +71,29 @@ export class EventsService {
     if (tag) {
       params = params.append('tags', tag.toString());
     }
-    return this.http.get<HttpResponse<EventsResponse>>(
-      'https://timelyapp.time.ly/api/calendars/4243455/events'
-    );
+    const subject = new Subject<HttpResponse<EventsResponse>>();
+    this.http
+      .get<HttpResponse<EventsResponse>>(
+        'https://timelyapp.time.ly/api/calendars/4243455/events',
+        { params }
+      )
+      .subscribe(
+        (response) => {
+          response.data.items = response.data.items.map(
+            (item): Event => {
+              return {
+                ...item,
+                imageURL: this.parseImageURL({ ...item })
+              };
+            }
+          );
+          subject.next(response);
+        },
+        () => {},
+        () => {
+          subject.complete();
+        }
+      );
+    return subject;
   }
 }
