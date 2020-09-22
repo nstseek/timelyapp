@@ -1,25 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-
-interface ImageSize {
-  width: number;
-  url: string;
-  height: number;
-}
-
-export interface EventImage {
-  sizes: {
-    small?: ImageSize;
-    thumbnail?: ImageSize;
-    medium?: ImageSize;
-    full?: ImageSize;
-  };
-  id: number;
-  title: string;
-}
+import { HttpResponse, Image } from '../core/types';
 
 export interface Event {
-  images: EventImage[];
+  images: Image[];
   start_datetime: string;
   title: string;
   description_short: string;
@@ -66,7 +50,7 @@ export class EventsService {
     if (tag) {
       params = params.append('tags', tag.toString());
     }
-    return this.http.get<EventsResponse>(
+    return this.http.get<HttpResponse<EventsResponse>>(
       'https://timelyapp.time.ly/api/calendars/4243455/events'
     );
   }
